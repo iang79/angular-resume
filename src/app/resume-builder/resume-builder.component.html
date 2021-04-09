@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="htmlData">
     <h5 class="card-header">
       Build Your Résumé
     </h5>
@@ -192,10 +192,106 @@
             <hr *ngIf="i !== experienceBlocks.controls.length - 1" />
           </div>
         </div>
+
+        <div class="flexContainer">
+          <h5>Educación</h5>
+          <svg (click)="addEducation()">
+            <use xlink:href="./../../assets/img/svg/icons.svg#icon-add"></use>
+          </svg>
+        </div>
+        <div
+          formArrayName="educationBlocks"
+          *ngFor="let education of educationBlocks.controls; let i = index"
+        >
+          <div
+            [ngClass]="{
+              'education-block': educationBlocks.controls.length > 1
+            }"
+            [formGroupName]="i"
+          >
+            <div class="form-row">
+              <div class="form-group col-md-10">
+                <label attr.for="{{ 'titleId' + i }}">Title</label>
+                <input
+                  class="form-control"
+                  id="{{ 'titleId' + i }}"
+                  type="text"
+                  placeholder="Ex: Software Engineer"
+                  formControlName="title"
+                />
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-10">
+                <label attr.for="{{ 'companyId' + i }}">Company</label>
+                <input
+                  class="form-control"
+                  id="{{ 'companyId' + i }}"
+                  type="text"
+                  placeholder="Ex: Microsoft"
+                  formControlName="company"
+                />
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-10">
+                <label attr.for="{{ 'locationId' + i }}">Location</label>
+                <input
+                  class="form-control"
+                  id="{{ 'locationId' + i }}"
+                  type="text"
+                  placeholder="Ex: London, United Kingdom"
+                  formControlName="location"
+                />
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-5">
+                <label attr.for="{{ 'startDateId' + i }}">Start Date</label>
+                <input
+                  class="form-control"
+                  id="{{ 'startDateId' + i }}"
+                  type="date"
+                  placeholder=""
+                  formControlName="startDate"
+                />
+              </div>
+              <div class="form-group col-md-5">
+                <label attr.for="{{ 'endDateId' + i }}">End Date</label>
+                <input
+                  class="form-control"
+                  id="{{ 'endDateId' + i }}"
+                  type="date"
+                  placeholder="End Date"
+                  formControlName="endDate"
+                />
+              </div>
+            </div>
+  
+            <div class="form-row">
+              <div class="form-group col-md-10">
+                <label attr.for="{{ 'descId' + i }}">Description</label>
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  id="{{ 'descId' + i }}"
+                  type="text"
+                  placeholder="Description"
+                  formControlName="description"
+                ></textarea>
+              </div>
+            </div>
+            <hr *ngIf="i !== experienceBlocks.controls.length - 1" />
+          </div>
+        </div>
         <button
           class="btn btn-primary"
           type="submit"
           style="width:100px"
+          (click)="openPDF()"
           [title]="
             resumeBuilderForm.valid
               ? 'Save your entered data'
